@@ -1,0 +1,1 @@
+cybercare = angular.module('customer-list', ['ngMaterial']);

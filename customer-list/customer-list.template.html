@@ -1,0 +1,36 @@
+<div ng-cloak>
+    <md-toolbar layout="row" class="md-hue-3">
+        <div class="md-toolbar-tools">
+            <span>Customers</span>
+        </div>
+    </md-toolbar>
+    <md-content>
+        <md-list class="md-dense" flex>
+            <md-list-item class="md-3-line" ng-repeat="customer in $ctrl.customers" ng-hover="null">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{customer.name}}</h3>
+                    <md-list-item class="md-2-line">
+                        <div class="md-list-item-text" layout="row">
+                            <p><b>Email:</b> {{customer.email}}</p>
+                            <p><b>Telephone:</b> {{customer.telephone}}</p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-3-line">
+                        <div class="md-list-item-text" layout="column">
+                                <p>{{customer.address.street}}</p>
+                                <p>{{customer.address.city}}, {{customer.address.state}}</p>
+                                <p>{{customer.address.zip}}</p>
+                        </div>
+                    </md-list-item>
+                </div>
+                <md-button class="md-secondary">
+                    Edit
+                </md-button>
+                <md-button class="md-secondary">
+                    Delete
+                </md-button>
+            </md-list-item>
+            <md-divider></md-divider>
+        </md-list>
+    </md-content>
+</div>

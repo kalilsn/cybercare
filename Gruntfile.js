@@ -18,15 +18,8 @@ module.exports = function(grunt) {
                 files: 'Gruntfile.js'
             },
 
-            js: {
-                files: '*.js',
-                options: {
-                    livereload: true
-                }
-            },
-
             livereload: {
-                files: '**/*.html',
+                files: '**/*.{html,js}',
                 options: {
                     livereload: true
                 }

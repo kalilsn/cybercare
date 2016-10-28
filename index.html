@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="cybercare" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Cybercare</title>
-    <link rel="stylesheet" href="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 </head>
 <body>
+    
+    <customer-list></customer-list>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+    <script src="app.module.js"></script>
+    <script src="customer-list/customer-list.module.js"></script>
+    <script src="customer-list/customer-list.component.js"></script>
 </body>
 </html>

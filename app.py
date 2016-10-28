@@ -13,7 +13,7 @@ app.install(plugin)
 
 
 # Serve static files
-@route('/<file>')
+@route('/<file:path>')
 def static(file):
     return static_file(file, "./")
 

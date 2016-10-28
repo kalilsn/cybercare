@@ -1,0 +1,28 @@
+{
+  "name": "cybercare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalilsn/cybercare.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalilsn/cybercare/issues"
+  },
+  "homepage": "https://github.com/kalilsn/cybercare#readme",
+  "devDependencies": {
+    "cssnano": "^3.7.6",
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
+    "load-grunt-tasks": "^3.5.2",
+    "postcss-cssnext": "^2.8.0",
+    "postcss-flexbugs-fixes": "^2.0.0"
+  }
+}

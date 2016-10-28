@@ -1,4 +1,4 @@
-from bottle import route, request, Bottle, run, response, HTTPError, HTTPResponse, hook
+from bottle import route, request, Bottle, run, response, HTTPError, HTTPResponse, hook, static_file
 from bottle.ext import sqlite
 from collections import OrderedDict
 import json
@@ -10,6 +10,18 @@ app = application = Bottle()
 
 plugin = sqlite.Plugin(dbfile=dbfilename, keyword="db")
 app.install(plugin)
+
+
+# Serve static files
+@route('/<file>')
+def static(file):
+    return static_file(file, "./")
+
+
+@route('/')
+@route('')
+def index():
+    return static_file("index.html", "./")
 
 
 # Enable cors and set format to json

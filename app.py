@@ -11,19 +11,6 @@ app = application = Bottle()
 plugin = sqlite.Plugin(dbfile=dbfilename, keyword="db")
 app.install(plugin)
 
-
-# Serve static files
-@route('/<file:path>')
-def static(file):
-    return static_file(file, "./")
-
-
-@route('/')
-@route('')
-def index():
-    return static_file("index.html", "./")
-
-
 # Enable cors and set format to json
 @hook('after_request')
 def set_headers():
@@ -47,15 +34,15 @@ def to_json(cursor):
 
     if len(result) == 1:
         row = nest_address(OrderedDict(zip(keys, result[0])))
-        return dict(data=row)
+        return row
     else:
         rows = [nest_address(OrderedDict(zip(keys, r))) for r in result]
         print len(result)
-        return dict(data=rows)
+        return rows
 
 
 def json_error(e, s):
-    return dict(error=e, status=s)
+    return dict(body=e, status=s)
 
 
 @route('/customers', method="GET", apply=[plugin])
@@ -63,8 +50,8 @@ def list_customers(db):
     try:
         cursor = db.execute('SELECT * FROM customers')
         customers = to_json(cursor)
-        if customers["data"]:
-            return customers
+        if customers:
+            return json.dumps(customers)
         else:
             response.status = 500
             return json_error("Database appears to be empty.", 500)
@@ -80,8 +67,8 @@ def get_customer(id, db):
     try:
         cursor = db.execute('SELECT * FROM customers WHERE id = ?', (str(id),))
         customer = to_json(cursor)
-        if customer["data"]:
-            return customer
+        if customer:
+            return json.dumps(customer)
         else:
             response.status = 404
             return json_error("No customer found by that id.", 404)
@@ -186,6 +173,17 @@ def delete_customer(id, db):
     except sqlite3.Error as e:
         response.status = 500
         return json_error(e.args[0], 500)
+
+# Serve static files
+@route('/<file:path>')
+def static(file):
+    return static_file(file, "./")
+
+
+@route('/')
+@route('')
+def index():
+    return static_file("index.html", "./")
 
 
 run(host='localhost', port=8080, debug=True, reloader=True)

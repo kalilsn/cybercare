@@ -11,7 +11,6 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 },
-                tasks: ['postcss:dev']
             },
 
             self: {
@@ -34,13 +33,92 @@ module.exports = function(grunt) {
                     require('postcss-flexbugs-fixes')()
                 ]
             },
-            dev: {
-                files: 'styles.css'
+            dist: {
+                src: 'styles.css',
+                dest: 'dist/styles.css'
             }
         },
+
+        processhtml: {
+            dist: {
+                files: {
+                    'dist/index.html': 'index.html'
+                }
+            }
+        },
+        
+        ngtemplates: {
+            options: {
+                module: "cybercare",
+                htmlmin: {
+                  collapseBooleanAttributes:      true,
+                  collapseWhitespace:             true,
+                  removeAttributeQuotes:          true,
+                  removeComments:                 true,
+                  removeEmptyAttributes:          true,
+                  removeRedundantAttributes:      true,
+                  removeScriptTypeAttributes:     true,
+                  removeStyleLinkTypeAttributes:  true
+                }
+            },
+            dist: {
+                src: "templates/*.html",
+                dest: "tmp/templates.js"
+            }
+        },
+
+        concat: {
+            dist: {
+                src: ['tmp/lib.js', 'app.module.js', 'app.config.js', 'components/**/*.js', '<%= ngtemplates.dist.dest %>'],
+                dest: 'dist/app.js'
+            }
+        },
+
+        copy: {
+            dist: {
+                files: [
+                    {src: '*.py', dest: 'dist/'},
+                ]
+            }
+        },
+
+        bower_concat: {
+            dist: {
+                dest: {
+                    'js': 'tmp/lib.js',
+                    'css': 'dist/lib.css'
+                },
+                callback: function(mainFiles, component) {
+                    return mainFiles.map(function(filepath) {
+                        // Use minified files if available
+                        var min = filepath
+                            .replace(/\.js$/, '.min.js')
+                            .replace(/\.css$/, '.min.css');
+                        return grunt.file.exists(min) ? min : filepath;
+                    });
+                }
+            }
+        },
+
+        clean: {
+            tmp: ['tmp'],
+            dist: ['dist/**/*']
+        },
+
+        run: {
+            db: {
+                cmd: "python",
+                args: ["create_database.py"],
+
+                options: {
+                    cwd: "dist"
+                }
+            }
+        }
 
     });
 
     grunt.registerTask('default', 'watch');
+    grunt.registerTask('build', ['clean:dist', 'postcss', 'bower_concat', 'ngtemplates', 'concat', 'processhtml', 'copy', 'run:db', 'clean:tmp']);
 
 };

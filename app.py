@@ -44,7 +44,7 @@ def to_json(cursor):
 def json_error(e, s):
     return dict(body=e, status=s)
 
-
+@route('/customers/', method="GET", apply=[plugin])
 @route('/customers', method="GET", apply=[plugin])
 def list_customers(db):
     try:
@@ -89,6 +89,7 @@ def flatten_address(d):
 
 
 # Sample request: {"name": "Alma Jensen", "email": "ep@wiwi.com", "telephone": 481190297, "address": {"city": "Ucimhug", "state": "UT", "street": "314 Conu Manor", "zip": "39067"}}
+@route('/customers/', method="POST", apply=[plugin])
 @route('/customers', method="POST", apply=[plugin])
 def add_customer(db):
 

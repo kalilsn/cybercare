@@ -1,0 +1,25 @@
+{
+  "name": "cybercare",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "Kalil Smith-Nuevelle <kalilsn@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/kalilsn/cybercare",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "^1.5.8",
+    "angular-aria": "^1.5.8",
+    "angular-material": "^1.1.1",
+    "angular-messages": "^1.5.8",
+    "angular": "^1.5.8"
+  }
+}

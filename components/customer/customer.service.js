@@ -6,6 +6,10 @@ angular.
                 'update': {
                     method:'PUT',
                     transformResponse: angular.noop
+                },
+                'save': {
+                    method:'Post',
+                    transformResponse: angular.noop
                 }
             });
         }

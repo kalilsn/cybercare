@@ -1,0 +1,53 @@
+<md-dialog aria-label="Edit customer dialog">
+    <md-dialog-content layout-padding>
+        <div layout="column" class="md-inline-form">
+            <form name="edit-customer">
+                <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input name="name" ng-model="ctrl.customer.name" placeholder="{{ctrl.customer.name}}" required>
+                </md-input-container>
+               
+               <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                       <label>Email</label>
+                       <input name="email" ng-model="ctrl.customer.email" required >
+                   </md-input-container>
+                   <md-input-container class="md-block" flex-gt-sm>
+                       <label>Telephone</label>
+                       <input name="telphone" ng-model="ctrl.customer.telephone" required>
+                   </md-input-container>
+               </div>
+                
+                <md-input-container class="md-block">
+                    <label>Address</label>
+                    <input name="street" ng-model="ctrl.customer.address.street" required>
+                </md-input-container>
+                
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm> 
+                        <label>City</label>
+                        <input name="city" ng-model="ctrl.customer.address.city" required>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>State</label>
+                        <md-select ng-model="ctrl.customer.address.state" required>
+                            <md-option ng-repeat="abbr in ctrl.USstates" value="{{abbr}}">
+                                {{abbr}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Zip Code</label>
+                        <input name="zip" ng-model="ctrl.customer.address.zip"
+                        required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                    </md-input-container>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button ng-click="ctrl.close()" class="md-raised">Cancel</md-button>
+        <md-button ng-click="ctrl.update()" class="md-raised md-primary">Save Changes</md-button>
+    </md-dialog-actions>
+
+</md-dialog>

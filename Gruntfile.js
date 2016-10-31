@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 
         concat: {
             dist: {
-                src: ['tmp/lib.js', 'app.module.js', 'app.config.js', 'components/**/*.js', '<%= ngtemplates.dist.dest %>'],
+                src: ['tmp/lib.js', 'app.js', 'components/**/*.js', '<%= ngtemplates.dist.dest %>'],
                 dest: 'dist/app.js'
             }
         },

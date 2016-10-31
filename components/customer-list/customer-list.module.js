@@ -1,1 +1,1 @@
-angular.module('customer-list', ['ngMaterial']);
+angular.module('customer-list', ['ngMaterial', 'customer']);

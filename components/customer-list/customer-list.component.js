@@ -2,16 +2,15 @@ angular.
     module("cybercare").
     component("customerList", {
         templateUrl: "templates/customer-list.template.html",
-        controller: ["$http",
-            function CustomerListController($http) {
+        controller: ["Customer", "$mdToast",
+            function CustomerListController(Customer, $mdToast) {
                 var self = this;
-                $http.get('customers').then(function(response) {
-                    self.customers = response.data;
-                });
-
-                self.remove = function remove(id) {
-                    $http.delete('customers/' + id).then(function(response) {
-                        
+                var api = new Customer();
+                self.customers = Customer.query();
+                self.removeCustomer = function(customer, i) {
+                    api.$remove({id: customer.id}, function() {
+                        self.customers.splice(i, 1);
+                        $mdToast.showSimple("Removed " + customer.name + " from the database.");
                     });
                 };
             }

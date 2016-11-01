@@ -11,6 +11,7 @@ app = application = Bottle()
 plugin = sqlite.Plugin(dbfile=dbfilename, keyword="db")
 app.install(plugin)
 
+
 # Enable cors and set format to json
 @hook('after_request')
 def set_headers():
@@ -43,6 +44,7 @@ def to_json(cursor):
 
 def json_error(e, s):
     return dict(body=e, status=s)
+
 
 @route('/customers/', method="GET", apply=[plugin])
 @route('/customers', method="GET", apply=[plugin])
@@ -115,10 +117,12 @@ def add_customer(db):
         validate(request.json)
         name = request.json["name"]
         customer = format_customer(request.json)
-        print customer
-        db.execute("INSERT INTO customers(name,email,telephone,street,city,state,zip) VALUES (?,?,?,?,?,?,?)", customer)
+        cursor = db.execute("INSERT INTO customers(name,email,telephone,street,city,state,zip) VALUES (?,?,?,?,?,?,?)", customer)
 
-        return HTTPResponse(body="Added %s to the database" % name, status=200)
+        id = cursor.lastrowid
+        cursor = db.execute('SELECT * FROM customers WHERE id = ?', (str(id),))
+        customer = to_json(cursor)
+        return json.dumps(customer)
 
     except sqlite3.Error as e:
         response.status = 500
@@ -145,7 +149,10 @@ def update_customer(id, db):
         updates = ', '.join(['{} = "{}"'.format(k, v) for k, v in flatten_address(request.json).items()])
         update = db.execute("UPDATE customers SET %s WHERE id = ?" % updates, (str(id),))
 
-        return HTTPResponse(body="Updated %s in the database" % customer["name"], status=200)
+        cursor = db.execute('SELECT * FROM customers WHERE id = ?', (str(id),))
+        customer = to_json(cursor)
+        return json.dumps(customer)
+
 
     except KeyError as e:
         response.status = 400
@@ -175,11 +182,6 @@ def delete_customer(id, db):
         response.status = 500
         return json_error(e.args[0], 500)
 
-# Serve static files
-@route('/<file:path>')
-def static(file):
-    return static_file(file, "./")
-
 
 @route('/')
 @route('')
@@ -187,4 +189,11 @@ def index():
     return static_file("index.html", "./")
 
 
-run(host='localhost', port=8080, debug=True, reloader=True)
+# Serve static files
+@route('/<file:path>')
+def static(file):
+    return static_file(file, "./")
+
+
+if __name__ == '__main__':
+    run(host='localhost', port=8080, debug=True, reloader=True)

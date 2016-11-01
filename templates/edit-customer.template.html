@@ -4,17 +4,17 @@
             <form name="edit-customer">
                 <md-input-container class="md-block">
                     <label>Name</label>
-                    <input name="name" ng-model="ctrl.customer.name" placeholder="{{ctrl.customer.name}}" required>
+                    <input name="name" ng-model="ctrl.customer.name" required>
                 </md-input-container>
                
                <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
-                       <label>Email</label>
-                       <input name="email" ng-model="ctrl.customer.email" required >
+                       <label>Email (user@xxx.yyy)</label>
+                       <input name="email" ng-model="ctrl.customer.email" required ng-pattern="/^.+@.+\..+$/">
                    </md-input-container>
                    <md-input-container class="md-block" flex-gt-sm>
-                       <label>Telephone</label>
-                       <input name="telphone" ng-model="ctrl.customer.telephone" required>
+                       <label>Telephone (digits only)</label>
+                       <input name="telephone" ng-model="ctrl.customer.telephone" required ng-pattern="/^[0-9]{10}[0-9]+$/">
                    </md-input-container>
                </div>
                 
@@ -37,7 +37,7 @@
                         </md-select>
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
-                        <label>Zip Code</label>
+                        <label>Zip Code (xxxxx)</label>
                         <input name="zip" ng-model="ctrl.customer.address.zip"
                         required ng-pattern="/^[0-9]{5}$/">
                     </md-input-container>

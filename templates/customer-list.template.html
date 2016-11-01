@@ -1,43 +1,42 @@
-<div ng-cloak>
-    <md-toolbar layout="row" class="md-primary">
-        <div class="md-toolbar-tools">
-            <h1 class="md-display-2">Customer List</h1>
-            <span flex></span>
-            <md-input-container class="md-primary md-hue-2" layout="row" align="start center">
-                <input placeholder="Search" ng-model="$scope.query"></input>
-            </md-input-container>
-            <md-button class="md-raised" aria-label="Add customer" ng-click="addCustomer($event)">
-                Add new customer
-            </md-button>
-        </div>
-    </md-toolbar>
-    <md-content layout="row" layout-align="center">
-        <md-list class="md-dense" flex-sm="100" flex-gt-sm="75" flex-gt-lg="60">
-            <md-list-item ng-repeat="customer in customers | filter:$scope.query" layout="row" layout-align="start">
-                
-                <md-list-item flex="33">
-                    <div class="md-list-item-text" layout="column" layout-align="start">
-                        <h2 class="md-title">{{customer.name}}</h2>
-                    </div>
-                </md-list-item>
-
-                <md-list-item flex="33" class="md-2-line" layout="row" layout-align="start">
-                    <div class="md-list-item-text" layout="column">
-                        <span><b>Email:</b> {{customer.email}}</span>
-                        <span><b>Telephone:</b> {{customer.telephone}}</span>
-                    </div>
-                </md-list-item>
-                
-                <md-list-item flex="33" class="md-2-line" layout="row" layout-align="start">
-                    <div class="md-list-item-text" layout="column">
-                        <span>{{customer.address.street}}</span>
-                        <span>{{customer.address.city}}, {{customer.address.state}} {{customer.address.zip}}</span>
-                    </div>
-                </md-list-item>
-                
-                <md-button class="md-raised md-secondary" ng-click="edit($event, $index)">Edit</md-button>
-                <md-button class="md-warn md-raised md-secondary" ng-click="removeCustomer(customer, $index)">Delete</md-button>
+<md-toolbar md-scroll-shrink layout="row" class="md-primary">
+    <div class="md-toolbar-tools">
+        <h1 class="md-display-2">Customer List</h1>
+        <span flex></span>
+        <md-input-container class="md-primary md-hue-2" layout="row" align="start center">
+            <input placeholder="Search" ng-model="$scope.query"></input>
+        </md-input-container>
+        <md-button class="md-raised" aria-label="Add customer" ng-click="addCustomer($event)">
+            Add new customer
+        </md-button>
+    </div>
+</md-toolbar>
+<md-content layout="column" layout-align="start center">
+    <md-list flex>
+        <md-list-item ng-repeat="customer in customers | filter:$scope.query" layout="row" layout-align="start">
+            
+            <md-list-item flex="33">
+                <div class="md-list-item-text" layout="column" layout-align="start">
+                    <h2 class="md-title">{{customer.name}}</h2>
+                </div>
             </md-list-item>
-        </md-list>
-    </md-content>
-</div>
+
+            <md-list-item flex="33" class="md-2-line" layout="row" layout-align="start">
+                <div class="md-list-item-text" layout="column">
+                    <span><b>Email:</b> {{customer.email}}</span>
+                    <span><b>Telephone:</b> {{customer.telephone}}</span>
+                </div>
+            </md-list-item>
+            
+            <md-list-item flex="33" class="md-2-line" layout="row" layout-align="start">
+                <div class="md-list-item-text" layout="column">
+                    <span>{{customer.address.street}}</span>
+                    <span>{{customer.address.city}}, {{customer.address.state}} {{customer.address.zip}}</span>
+                </div>
+            </md-list-item>
+            
+            <md-button class="md-raised md-secondary" ng-click="edit($event, $index)">Edit</md-button>
+            <md-button class="md-warn md-raised md-secondary" ng-click="removeCustomer(customer, $index)">Delete</md-button>
+        </md-list-item>
+        <md-divider></md-divider>
+    </md-list>
+</md-content>

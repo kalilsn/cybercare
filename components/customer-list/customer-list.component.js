@@ -36,6 +36,9 @@ angular.
                     customer.$remove(function() {
                         $scope.customers.splice(i, 1);
                         $mdToast.showSimple("Removed " + name + " from the database.");
+                    }, function(err) {
+                        console.log(err);
+                        $mdToast.showSimple(err.data.body);
                     });
                 };
             }
@@ -48,10 +51,12 @@ function EditCustomerController(Customer, $mdToast, $mdDialog, $scope, i) {
     self.customer = $scope.customers[i];
     self.USstates = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
     self.update = function() {
-        console.log(self.customer);
         self.customer.$update(function() {
             $mdToast.showSimple("Updated " + self.customer.name + " in the database.");
             self.close();
+        }, function(err) {
+            console.log(err);
+            $mdToast.showSimple(err.data.body);
         });
     };
     self.close = function() {
@@ -69,6 +74,9 @@ function AddCustomerController(Customer, $mdToast, $mdDialog, $scope) {
             $scope.customers.push(self.customer);
             $mdToast.showSimple("Added " + self.customer.name + " to the database.");
             self.close();
+        }, function(err) {
+            console.log(err);
+            $mdToast.showSimple(err.data.body);
         });
     };
     self.close = function() {

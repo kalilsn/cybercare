@@ -80,12 +80,9 @@ def get_customer(id, db):
 
 
 def flatten_address(d):
-    try:
-        address = d.pop("address")
-        for k, v in address.items():
-            d[k] = v
-    except KeyError:
-        pass
+    address = d.pop("address")
+    for k, v in address.items():
+        d[k] = v
 
     return d
 
@@ -100,22 +97,14 @@ def add_customer(db):
         # Order the data
         keys = ["name", "email", "telephone", "street", "city", "state", "zip"]
         customer = []
-        for key in keys:
-            customer.append(data[key])
+        try:
+            for key in keys:
+                customer.append(data[key])
+        except KeyError:
+            raise ValueError("%s is required." % key)
         return customer
 
-    def validate(data):
-        required_keys = ['address', 'email', 'name', 'telephone']
-        for key in required_keys:
-            try:
-                if not data[key]:
-                    raise ValueError("%s is required." % key)
-            except KeyError:
-                raise ValueError("%s is required." % key)
-
     try:
-        validate(request.json)
-        name = request.json["name"]
         customer = format_customer(request.json)
         cursor = db.execute("INSERT INTO customers(name,email,telephone,street,city,state,zip) VALUES (?,?,?,?,?,?,?)", customer)
 
@@ -139,14 +128,17 @@ def update_customer(id, db):
         return
 
     try:
-        validate(request.json)
+        print request.json
 
         result = db.execute("SELECT * FROM customers WHERE id = ?", (str(id),))
         customer = result.fetchone()
         if not customer:
-            raise KeyError(customer["name"])
+            raise KeyError(request.json["name"])
 
-        updates = ', '.join(['{} = "{}"'.format(k, v) for k, v in flatten_address(request.json).items()])
+        updates_dict = flatten_address(request.json)
+
+        updates = ', '.join(['{} = "{}"'.format(k, v) for k, v in updates_dict.items()])
+
         update = db.execute("UPDATE customers SET %s WHERE id = ?" % updates, (str(id),))
 
         cursor = db.execute('SELECT * FROM customers WHERE id = ?', (str(id),))

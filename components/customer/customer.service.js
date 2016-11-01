@@ -4,13 +4,8 @@ angular.
         function($resource) {
             return $resource("customers/:id", {id:"@id"}, {
                 'update': {
-                    method:'PUT',
-                    transformResponse: angular.noop
+                    method:'PUT'
                 },
-                'save': {
-                    method:'Post',
-                    transformResponse: angular.noop
-                }
             });
         }
     ]); 

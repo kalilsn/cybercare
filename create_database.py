@@ -36,7 +36,7 @@ if not os.path.isfile(dbname):
         INSERT INTO customers(name,email,telephone,street,city,state,zip)
         VALUES ('Dylan Silva','ziec@gehwatir.edu',774025478,'1834 Jakib Park','Fevomjuf','GA','42325');
         INSERT INTO customers(name,email,telephone,street,city,state,zip)
-        VALUES ('Eliza Stewart','fa@ji.net',346960023,'1904 Muzo Heights','Ewanecuk','DC','17422');
+        VALUES ('Eliza Stewart','fa@ji.net',346960023,'1904 Muzo Heights','Ewanecuk','MD','17422');
         INSERT INTO customers(name,email,telephone,street,city,state,zip)
         VALUES ('Corey Warner','dornechuv@led.com',316620262,'169 Zosu River','Osmohon','TN','41940');
         INSERT INTO customers(name,email,telephone,street,city,state,zip)
@@ -212,7 +212,7 @@ if not os.path.isfile(dbname):
         INSERT INTO customers(name,email,telephone,street,city,state,zip)
         VALUES ('Delia Reed','iv@el.com',410879367,'1386 Fehu Boulevard','Hocuwvij','VT','66501');
         INSERT INTO customers(name,email,telephone,street,city,state,zip)
-        VALUES ('Katie Gill','nicadi@luij.io',321693650,'15 Wofo Road','Anocpug','DC','55486');
+        VALUES ('Katie Gill','nicadi@luij.io',321693650,'15 Wofo Road','Anocpug','MD','55486');
         INSERT INTO customers(name,email,telephone,street,city,state,zip)
         VALUES ('Lloyd Welch','doojuza@fekgop.net',526229195,'906 Dosik Parkway','Golhutan','OH','91924');
         INSERT INTO customers(name,email,telephone,street,city,state,zip)

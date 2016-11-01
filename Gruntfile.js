@@ -50,16 +50,6 @@ module.exports = function(grunt) {
         ngtemplates: {
             options: {
                 module: "cybercare",
-                htmlmin: {
-                  collapseBooleanAttributes:      true,
-                  collapseWhitespace:             true,
-                  removeAttributeQuotes:          true,
-                  removeComments:                 true,
-                  removeEmptyAttributes:          true,
-                  removeRedundantAttributes:      true,
-                  removeScriptTypeAttributes:     true,
-                  removeStyleLinkTypeAttributes:  true
-                }
             },
             dist: {
                 src: "templates/*.html",
@@ -114,11 +104,23 @@ module.exports = function(grunt) {
                     cwd: "dist"
                 }
             }
+        },
+       
+        replace: {
+            python: {
+                src: ['dist/app.py'],
+                dest: 'dist/app.py',
+                replacements: [
+                    {from: /# DEV([\s\S]*?)# ENDDEV/g, to: ""},
+                    {from: /# BUILD\n# ([\s\S]*?)# ENDBUILD/g, to: "$1"},
+                    {from: /@/g, to: "@app."}
+                ]
+            }
         }
 
     });
 
     grunt.registerTask('default', 'watch');
-    grunt.registerTask('build', ['clean:dist', 'postcss', 'bower_concat', 'ngtemplates', 'concat', 'processhtml', 'copy', 'run:db', 'clean:tmp']);
+    grunt.registerTask('build', ['clean:dist', 'postcss', 'bower_concat', 'ngtemplates', 'concat', 'processhtml', 'copy', 'replace', 'run:db', 'clean:tmp']);
 
 };

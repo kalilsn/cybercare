@@ -2,3 +2,4 @@ cybercare.db
 node_modules/
 bower_components/
 dist/
+deploy.sh

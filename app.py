@@ -80,10 +80,12 @@ def get_customer(id, db):
 
 
 def flatten_address(d):
-    address = d.pop("address")
-    for k, v in address.items():
-        d[k] = v
-
+    try:
+        address = d.pop("address")
+        for k, v in address.items():
+            d[k] = v
+    except KeyError:
+        pass
     return d
 
 

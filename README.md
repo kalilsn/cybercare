@@ -8,7 +8,7 @@ Requires Python 2.7 and SQLite.
 1. Install [pip](https://pypi.python.org/pypi/pip), [npm](https://www.npmjs.com/) and [bower](https://bower.io/).
 2. Navigate to the directory and run `npm install`
 3. Run `bower install`
-4. Run `pip install -r requirements`
+4. Run `pip install -r requirements.txt`
 
 To serve locally, run `python app.py` and navigate to <i>localhost:8080</i>
 
